@@ -1,0 +1,7 @@
+# Secrets
+/.env
+
+# Build artifacts
+/build
+/node_modules
+/npm-debug.log

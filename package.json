@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cd ./src && env-cmd -f ../.env ts-node .",
     "build": "tsc",
-    "start": "cd ./build && node .",
+    "start": "cd ./build && env-cmd -f ../.env node .",
     "db-create": "env-cmd sequelize db:create",
     "db-drop": "env-cmd sequelize db:drop",
     "migrate": "env-cmd sequelize db:migrate",

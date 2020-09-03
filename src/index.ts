@@ -1,29 +1,36 @@
 import Koa from 'koa';
-import Router from 'koa-router';
 import logger from 'koa-logger';
 import json from 'koa-json';
 import bodyParser from 'koa-bodyparser';
+import registerRoutes from './routes';
+import { initDatabase } from './db';
 
-const app = new Koa();
-const router = new Router();
-const PORT = 3000;
+async function main() {
+  const app = new Koa();
+  const PORT = process.env.PORT;
 
-/** Middlewares */
-app.use(json());
-app.use(logger());
-app.use(bodyParser());
+  /** Init Database */
+  await initDatabase();
 
-/** Routes */
-app.use(router.routes()).use(router.allowedMethods());
+  /** Middlewares */
+  app.use(json());
+  app.use(logger());
+  app.use(bodyParser());
 
-router.get('/', async (ctx: Koa.Context, next: () => Promise<any>) => {
-  ctx.body = { message: 'This is your GET route' };
-  await next();
-});
+  /** Routes */
+  registerRoutes({ app });
 
-router.post('/data', async (ctx: Koa.Context, next: () => Promise<any>) => {
-  ctx.body = { message: 'This is your POST route, attached you can find the data you sent', body: ctx.request.body };
-  await next();
-});
+  await app.listen(PORT);
+  console.info(`Server started: http://localhost:${PORT}`);
+  await new Promise((resolve) => process.on('SIGINT', resolve));
+  return 0;
+}
 
-app.listen(PORT, () => console.log('Server started.'));
+main()
+  .then((code) => {
+    process.exit(code);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

@@ -3,14 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "cd ./src && ts-node .",
+    "dev": "cd ./src && env-cmd -f ../.env ts-node .",
     "build": "tsc",
-    "start": "cd ./build && node ."
+    "start": "cd ./build && node .",
+    "db-create": "env-cmd sequelize db:create",
+    "db-drop": "env-cmd sequelize db:drop",
+    "migrate": "env-cmd sequelize db:migrate",
+    "migration-add": "env-cmd sequelize migration:generate --name new",
+    "migration-undo": "env-cmd sequelize db:migrate:undo",
+    "seed": "env-cmd sequelize db:seed:all",
+    "seed-add": "env-cmd sequelize seed:generate --name new",
+    "migrate-in-container": "cross-env $(cat .dockerenv | xargs) sequelize db:migrate",
+    "seed-in-container": "cross-env $(cat .dockerenv | xargs) sequelize db:seed:all"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/koa": "^2.11.4",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-json": "^2.0.18",
+    "@types/koa-logger": "^3.1.1",
+    "@types/koa-router": "^7.4.1",
     "@types/node": "^14.6.2",
+    "@types/require-dir": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
     "eslint": "^7.5.0",
     "eslint-config-airbnb-typescript": "^9.0.0",
@@ -21,5 +36,19 @@
     "prettier": "^2.1.1",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "env-cmd": "^10.1.0",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-json": "^2.0.2",
+    "koa-json-error": "^3.1.2",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^9.4.0",
+    "pg": "^8.3.3",
+    "require-dir": "^1.2.0",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0",
+    "url-join": "^4.0.1"
   }
 }

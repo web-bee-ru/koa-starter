@@ -13,5 +13,5 @@
       "@types/node"
     ]
   },
-  "files": ["commitlint.config.ts", "src/index.ts"]
+  "include": ["commitlint.config.ts", "src/**/*"]
 }

@@ -19,15 +19,17 @@ interface Dir {
 export default function registerRoutes(ctx: Context) {
   const { app } = ctx;
   app.use(
-    error((err) => {
-      return {
-        // Copy some attributes from the original error
-        status: err.status,
-        message: err.message,
-        // ...or add some custom ones
-        success: false,
-        reason: 'Unexpected',
-      };
+    error({
+      postFormat: (err, formattedError) => {
+        return {
+          // Copy some attributes from the original error
+          status: formattedError?.status,
+          message: err.message,
+          // ...or add some custom ones
+          success: false,
+          reason: 'Unexpected',
+        };
+      },
     }),
   );
 

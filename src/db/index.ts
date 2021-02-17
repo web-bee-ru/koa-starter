@@ -2,8 +2,7 @@ import requireDir from 'require-dir';
 import { Sequelize } from 'sequelize';
 import configs from './db.config';
 
-const ENV = process.env.NODE_ENV || 'development';
-const DB_CONFIG = configs[ENV];
+const DB_CONFIG = configs[process.env.NODE_ENV];
 
 const sequelize = new Sequelize(DB_CONFIG);
 

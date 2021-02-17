@@ -11,7 +11,7 @@
     "outDir": "build",
     "types": [
       "@types/node"
-    ],
+    ]
   },
-  "files": ["commitlint.config.ts"],
+  "files": ["commitlint.config.ts", "src/index.ts"]
 }

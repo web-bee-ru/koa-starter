@@ -1,7 +1,9 @@
 import Router from 'koa-router';
 import { Example } from '../db/models/Example';
 
-export default function registerRoute(router: Router) {
+const registerRoute: () => Router = () => {
+  let router = new Router();
+
   router.get('/', async (ctx) => {
     ctx.body = { data: 'ok' };
   });
@@ -9,4 +11,8 @@ export default function registerRoute(router: Router) {
   router.get('/all', async (ctx) => {
     ctx.body = await Example.findAll({});
   });
-}
+
+  return router;
+};
+
+export default registerRoute;

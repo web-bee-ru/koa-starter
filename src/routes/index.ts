@@ -35,7 +35,7 @@ export default function registerRoutes(ctx: Context) {
 
   const dir = requireDir('./', { recurse: true });
   registerDir(dir, ctx, {
-    prefix: process.env.ROUTES_PREFIX,
+    prefix: '',
   });
 
   // фикс бесконечной загрузки, если путь запроса не существует
@@ -54,16 +54,15 @@ function registerDir(dir: Dir, ctx: Context, config: RouteConfig) {
     if (routePrefix.endsWith('/index')) {
       routePrefix = routePrefix.slice(0, -'/index'.length);
     }
-    const router = new Router({ prefix: routePrefix });
-    const required = dir[key].default;
-    if (typeof required === 'object') {
+    const required = dir[key];
+    if (typeof required === 'object' && typeof required.default !== 'function') {
       registerDir(required, ctx, {
         prefix: routePrefix,
       });
       return;
-    }
-    if (typeof required === 'function') {
-      required(router);
+    } else if (typeof required.default === 'function') {
+      const registerRoute = required.default as () => Router;
+      const router = registerRoute();
       console.info('route added: ', routePrefix);
       app.use(router.routes());
       return;

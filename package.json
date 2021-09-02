@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "cd ./src && env-cmd -f ../.env ts-node .",
     "dev-hot": "cd ./src && env-cmd -f ../.env ts-node-dev .",
+    "sequelize-ts": "ts-node -T -r tsconfig-paths/register ./node_modules/sequelize-cli/lib/sequelize",
     "build": "tsc",
     "lint": "eslint --ext .ts,.js .",
     "start": "cd ./build && env-cmd -f ../.env node .",

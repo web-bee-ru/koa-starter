@@ -16,6 +16,8 @@ interface Dir {
   [path: string]: any;
 }
 
+export type TRegisterRoute = () => Router;
+
 export default function registerRoutes(ctx: App) {
   const { app } = ctx;
   app.use(
@@ -61,7 +63,7 @@ function registerDir(dir: Dir, ctx: App, config: RouteConfig) {
       });
       return;
     } else if (typeof required.default === 'function') {
-      const registerRoute = required.default as () => Router;
+      const registerRoute = required.default as TRegisterRoute;
       const router = registerRoute();
       console.info('route added: ', routePrefix);
       app.use(router.routes());

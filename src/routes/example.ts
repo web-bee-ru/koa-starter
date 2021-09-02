@@ -1,8 +1,7 @@
-import Router from 'koa-router';
-import { ParamedRouters } from '.';
+import { ParamedRouters, TRegisterRoute } from '.';
 import { Example } from '../db/models/Example';
 
-const registerRoute: () => Router = () => {
+const registerRoute: TRegisterRoute = () => {
   let router = new ParamedRouters();
 
   router.get('/', async (ctx) => {

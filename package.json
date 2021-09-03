@@ -12,10 +12,10 @@
     "db-create": "env-cmd sequelize db:create",
     "db-drop": "env-cmd sequelize db:drop",
     "migrate": "env-cmd npm run sequelize-ts db:migrate",
-    "migration-add": "env-cmd npm run sequelize-ts migration:generate --name new",
+    "migration-add": "env-cmd npm run sequelize-ts migration:generate -- --name new",
     "migration-undo": "env-cmd npm run sequelize-ts db:migrate:undo",
     "seed": "env-cmd npm run sequelize-ts db:seed:all",
-    "seed-add": "env-cmd npm run sequelize-ts seed:generate --name new",
+    "seed-add": "env-cmd npm run sequelize-ts seed:generate -- --name new",
     "seed-undo": "env-cmd npm run sequelize-ts db:seed:undo",
     "migrate-in-container": "cross-env $(cat .dockerenv | xargs) npm run sequelize-ts db:migrate",
     "seed-in-container": "cross-env $(cat .dockerenv | xargs) npm run sequelize-ts db:seed:all"

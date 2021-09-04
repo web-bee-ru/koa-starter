@@ -1,5 +1,7 @@
+import { QueryInterface, Sequelize } from 'sequelize';
+
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface: QueryInterface, sequelize: Sequelize) => {
     await queryInterface.bulkInsert(
       'examples',
       [
@@ -13,7 +15,7 @@ module.exports = {
     );
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface: QueryInterface, sequelize: Sequelize) => {
     /**
      * Add commands to revert seed here.
      *

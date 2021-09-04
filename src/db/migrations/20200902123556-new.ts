@@ -1,5 +1,7 @@
+import { QueryInterface, Sequelize, DataTypes } from 'sequelize';
+
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface: QueryInterface, sequelize: Sequelize) => {
     return queryInterface.createTable(
       'examples',
       {
@@ -7,29 +9,29 @@ module.exports = {
           allowNull: false,
           autoIncrement: true,
           primaryKey: true,
-          type: Sequelize.INTEGER,
+          type: DataTypes.INTEGER,
         },
         text: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false,
           unique: true,
         },
         created_at: {
           allowNull: false,
-          type: Sequelize.DATE,
+          type: DataTypes.DATE,
         },
         updated_at: {
           allowNull: false,
-          type: Sequelize.DATE,
+          type: DataTypes.DATE,
         },
         deleted_at: {
-          type: Sequelize.DATE,
+          type: DataTypes.DATE,
         },
       },
       {},
     );
   },
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface: QueryInterface, sequelize: Sequelize) => {
     return queryInterface.dropTable('examples');
   },
 };

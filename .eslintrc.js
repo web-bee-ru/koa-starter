@@ -7,7 +7,9 @@ module.exports = {
   extends: ['airbnb-typescript/base', 'prettier'],
   root: true,
   parserOptions: {
-    project: './tsconfig.json',
+    project: "tsconfig.json",
+    tsconfigRootDir: __dirname,
+    sourceType: "module",
   },
   rules: {
     // сложно искать работу с частями ДТОшек

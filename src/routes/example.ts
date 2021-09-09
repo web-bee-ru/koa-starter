@@ -1,19 +1,21 @@
-import { ParamedRouters, TRegisterRoute } from '.';
+import { TRegisterRoute } from '.';
 import { Example } from '../db/models/Example';
+import ParamedRouters from '../lib/ParamedRouter';
 
 const registerRoute: TRegisterRoute = () => {
-  let router = new ParamedRouters();
+  const prefix = '/:smth';
+  const router = new ParamedRouters<typeof prefix>({ prefix });
 
-  router.get('/', async (ctx) => {
+  router.pGet('/', async (ctx) => {
     ctx.body = { data: 'ok' };
   });
 
-  router.get('/all', async (ctx) => {
+  router.pGet('/all', async (ctx) => {
     ctx.body = await Example.findAll({});
   });
 
-  router.paramedGet('/example/:str', async (ctx) => {
-    ctx.body = ctx.params.str;
+  router.pGet('/example/:sample', async (ctx) => {
+    ctx.body = `${ctx.params.smth} ${ctx.params.sample}`;
   });
 
   return router;
